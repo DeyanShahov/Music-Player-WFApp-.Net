@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@
             this.lblTrackStart = new System.Windows.Forms.Label();
             this.lblTrackEnd = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
@@ -139,8 +141,10 @@
             // 
             this.progressBar.Location = new System.Drawing.Point(16, 360);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(772, 10);
+            this.progressBar.Size = new System.Drawing.Size(772, 5);
+            this.progressBar.Step = 5;
             this.progressBar.TabIndex = 7;
+            this.progressBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProgressBarMouseDown);
             // 
             // listBoxTrackList
             // 
@@ -169,11 +173,15 @@
             // 
             this.trackBarVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.trackBarVolume.Location = new System.Drawing.Point(743, 24);
+            this.trackBarVolume.Maximum = 100;
             this.trackBarVolume.Name = "trackBarVolume";
             this.trackBarVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarVolume.Size = new System.Drawing.Size(45, 177);
             this.trackBarVolume.TabIndex = 10;
+            this.trackBarVolume.TickFrequency = 10;
             this.trackBarVolume.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarVolume.Value = 50;
+            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
             // 
             // lblVolumeCurrent
             // 
@@ -212,6 +220,7 @@
             // lblTrackStart
             // 
             this.lblTrackStart.AutoSize = true;
+            this.lblTrackStart.BackColor = System.Drawing.Color.Transparent;
             this.lblTrackStart.Font = new System.Drawing.Font("Digital-7", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTrackStart.ForeColor = System.Drawing.Color.Lime;
             this.lblTrackStart.Location = new System.Drawing.Point(12, 66);
@@ -243,6 +252,11 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 236);
             this.panel1.TabIndex = 15;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Form1
             // 
@@ -291,6 +305,7 @@
         private System.Windows.Forms.Label lblTrackStart;
         private System.Windows.Forms.Label lblTrackEnd;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

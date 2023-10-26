@@ -17,6 +17,8 @@ namespace Music_Player_WFApp.Net
         public Form1()
         {
             InitializeComponent();
+            axWindowsMediaPlayer.settings.volume = 50;
+            lblVolumeMax.Text = "50 %";
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -60,6 +62,35 @@ namespace Music_Player_WFApp.Net
             {
                 listBoxTrackList.SelectedIndex = listBoxTrackList.SelectedIndex - 1;
             }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (axWindowsMediaPlayer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                progressBar.Maximum = (int)axWindowsMediaPlayer.Ctlcontrols.currentItem.duration;
+                progressBar.Value = (int)axWindowsMediaPlayer.Ctlcontrols.currentPosition;
+            }
+
+            try
+            {
+                lblTrackStart.Text = axWindowsMediaPlayer.Ctlcontrols.currentPositionString;
+                lblTrackEnd.Text = axWindowsMediaPlayer.Ctlcontrols.currentItem?.durationString;
+            }
+            catch
+            {
+            }
+        }
+
+        private void trackBarVolume_Scroll(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer.settings.volume = trackBarVolume.Value;
+            lblVolumeMax.Text = trackBarVolume.Value.ToString() + " %";
+        }
+
+        private void ProgressBarMouseDown(object sender, MouseEventArgs e)
+        {
+            axWindowsMediaPlayer.Ctlcontrols.currentPosition = axWindowsMediaPlayer.currentMedia.duration * e.X / progressBar.Width;
         }
     }
 }
