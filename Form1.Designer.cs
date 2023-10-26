@@ -128,6 +128,7 @@
             this.btnOpen.TabIndex = 6;
             this.btnOpen.Text = "Open";
             this.btnOpen.UseVisualStyleBackColor = false;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // progressBar
             // 
@@ -139,12 +140,14 @@
             // listBoxTrackList
             // 
             this.listBoxTrackList.BackColor = System.Drawing.Color.DimGray;
+            this.listBoxTrackList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBoxTrackList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.listBoxTrackList.FormattingEnabled = true;
             this.listBoxTrackList.Location = new System.Drawing.Point(269, 8);
             this.listBoxTrackList.Name = "listBoxTrackList";
-            this.listBoxTrackList.Size = new System.Drawing.Size(465, 212);
+            this.listBoxTrackList.Size = new System.Drawing.Size(465, 208);
             this.listBoxTrackList.TabIndex = 8;
+            this.listBoxTrackList.SelectedIndexChanged += new System.EventHandler(this.listBoxTrackList_SelectedIndexChanged);
             // 
             // pictureBoxArt
             // 
@@ -198,9 +201,8 @@
             this.axWindowsMediaPlayer.Location = new System.Drawing.Point(0, 0);
             this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer";
             this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer.OcxState")));
-            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(800, 63);
+            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(800, 172);
             this.axWindowsMediaPlayer.TabIndex = 0;
-            this.axWindowsMediaPlayer.Enter += new System.EventHandler(this.axWindowsMediaPlayer_Enter);
             // 
             // lblTrackStart
             // 
@@ -252,8 +254,8 @@
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPreview);
-            this.Controls.Add(this.axWindowsMediaPlayer);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.axWindowsMediaPlayer);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).EndInit();
