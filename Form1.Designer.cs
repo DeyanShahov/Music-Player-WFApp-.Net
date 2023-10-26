@@ -63,6 +63,7 @@
             this.btnPreview.TabIndex = 1;
             this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = false;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnNext
             // 
@@ -76,6 +77,7 @@
             this.btnNext.TabIndex = 2;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPlay
             // 
@@ -89,6 +91,7 @@
             this.btnPlay.TabIndex = 3;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = false;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // btnPause
             // 
@@ -102,6 +105,7 @@
             this.btnPause.TabIndex = 4;
             this.btnPause.Text = "Pause";
             this.btnPause.UseVisualStyleBackColor = false;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnStop
             // 
@@ -113,8 +117,9 @@
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(110, 34);
             this.btnStop.TabIndex = 5;
-            this.btnStop.Text = "Start";
+            this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnOpen
             // 

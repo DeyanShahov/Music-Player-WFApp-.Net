@@ -39,5 +39,27 @@ namespace Music_Player_WFApp.Net
             axWindowsMediaPlayer.URL = path[listBoxTrackList.SelectedIndex];
             axWindowsMediaPlayer.Ctlcontrols.play();
         }
+
+        private void btnStop_Click(object sender, EventArgs e) => axWindowsMediaPlayer.Ctlcontrols.stop();
+
+        private void btnPause_Click(object sender, EventArgs e) => axWindowsMediaPlayer.Ctlcontrols.pause();
+
+        private void btnPlay_Click(object sender, EventArgs e) => axWindowsMediaPlayer.Ctlcontrols.play();
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (listBoxTrackList.SelectedIndex < listBoxTrackList.Items.Count - 1)
+            {
+                listBoxTrackList.SelectedIndex = listBoxTrackList.SelectedIndex + 1;
+            }
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            if (listBoxTrackList.SelectedIndex > 0)
+            {
+                listBoxTrackList.SelectedIndex = listBoxTrackList.SelectedIndex - 1;
+            }
+        }
     }
 }
