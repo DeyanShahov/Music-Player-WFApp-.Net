@@ -16,5 +16,10 @@ namespace Music_Player_WFApp.Net
         {
             InitializeComponent();
         }
+
+        private void axWindowsMediaPlayer_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
