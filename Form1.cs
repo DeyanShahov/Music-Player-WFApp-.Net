@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Music_Player_WFApp.Net
 {
     public partial class Form1 : Form
     {
-        string[] path;
+        string[] paths;
         string[] files;
         public Form1()
         {
@@ -28,7 +29,7 @@ namespace Music_Player_WFApp.Net
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 files = ofd.FileNames;
-                path = ofd.FileNames;
+                paths = ofd.FileNames;
                 for (int i = 0; i < files.Length; i++)
                 {
                     listBoxTrackList.Items.Add(files[i]);
@@ -38,11 +39,26 @@ namespace Music_Player_WFApp.Net
 
         private void listBoxTrackList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer.URL = path[listBoxTrackList.SelectedIndex];
+            axWindowsMediaPlayer.URL = paths[listBoxTrackList.SelectedIndex];
             axWindowsMediaPlayer.Ctlcontrols.play();
+
+            //Set picture Album from selected song ... Work only if contains this image
+            try
+            {
+                var file = TagLib.File.Create(paths[listBoxTrackList.SelectedIndex]);
+                var bin = (byte[])(file.Tag.Pictures[0].Data.Data);
+                pictureBoxArt.Image = Image.FromStream(new MemoryStream(bin));
+            }
+            catch
+            {
+            }
         }
 
-        private void btnStop_Click(object sender, EventArgs e) => axWindowsMediaPlayer.Ctlcontrols.stop();
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer.Ctlcontrols.stop();
+            progressBar.Value = 0;
+        }
 
         private void btnPause_Click(object sender, EventArgs e) => axWindowsMediaPlayer.Ctlcontrols.pause();
 
