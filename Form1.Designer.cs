@@ -47,6 +47,8 @@
             this.lblTrackEnd = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnShufle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
@@ -139,7 +141,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(16, 360);
+            this.progressBar.Location = new System.Drawing.Point(16, 348);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(772, 5);
             this.progressBar.Step = 5;
@@ -258,12 +260,41 @@
             this.timer.Enabled = true;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Black;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnClear.Location = new System.Drawing.Point(596, 359);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(70, 25);
+            this.btnClear.TabIndex = 16;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnShufle
+            // 
+            this.btnShufle.BackColor = System.Drawing.Color.Black;
+            this.btnShufle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShufle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnShufle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnShufle.Location = new System.Drawing.Point(520, 359);
+            this.btnShufle.Name = "btnShufle";
+            this.btnShufle.Size = new System.Drawing.Size(70, 25);
+            this.btnShufle.TabIndex = 17;
+            this.btnShufle.Text = "Shufle";
+            this.btnShufle.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnShufle);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.lblTrackEnd);
             this.Controls.Add(this.lblTrackStart);
             this.Controls.Add(this.progressBar);
@@ -306,6 +337,8 @@
         private System.Windows.Forms.Label lblTrackEnd;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnShufle;
     }
 }
 

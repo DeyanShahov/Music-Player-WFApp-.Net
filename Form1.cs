@@ -8,44 +8,61 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using WMPLib;
 
 namespace Music_Player_WFApp.Net
 {
     public partial class Form1 : Form
     {
-        string[] paths;
-        string[] files;
+        List<string> files = new List<string>();
+        //WindowsMediaPlayer wmp;
         public Form1()
         {
             InitializeComponent();
             axWindowsMediaPlayer.settings.volume = 50;
             lblVolumeMax.Text = "50 %";
+            //wmp = (WindowsMediaPlayer)axWindowsMediaPlayer.GetOcx();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Multiselect = true;
-            if (ofd.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                files = ofd.FileNames;
-                paths = ofd.FileNames;
-                for (int i = 0; i < files.Length; i++)
+                ofd.Multiselect = true;
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    listBoxTrackList.Items.Add(files[i]);
+                    try
+                    {
+                        //files = ofd.FileNames;
+                        listBoxTrackList.Items.Clear();
+                        files.AddRange(ofd.FileNames);
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                           listBoxTrackList.Items.Add(files[i]);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Unable to load file!\n\n" + ex.Message); 
+                    }
                 }
             }
         }
 
+
+
         private void listBoxTrackList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer.URL = paths[listBoxTrackList.SelectedIndex];
+            axWindowsMediaPlayer.URL = files[listBoxTrackList.SelectedIndex];
             axWindowsMediaPlayer.Ctlcontrols.play();
+
+            //wmp.settings.setMode("Audio", true);
+            //wmp.currentPlaylist.appendItem(wmp.mediaCollection.getByName("Bars"));
 
             //Set picture Album from selected song ... Work only if contains this image
             try
             {
-                var file = TagLib.File.Create(paths[listBoxTrackList.SelectedIndex]);
+                var file = TagLib.File.Create(files[listBoxTrackList.SelectedIndex]);
                 var bin = (byte[])(file.Tag.Pictures[0].Data.Data);
                 pictureBoxArt.Image = Image.FromStream(new MemoryStream(bin));
             }
@@ -82,7 +99,7 @@ namespace Music_Player_WFApp.Net
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (axWindowsMediaPlayer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            if (axWindowsMediaPlayer.playState == WMPPlayState.wmppsPlaying)
             {
                 progressBar.Maximum = (int)axWindowsMediaPlayer.Ctlcontrols.currentItem.duration;
                 progressBar.Value = (int)axWindowsMediaPlayer.Ctlcontrols.currentPosition;
@@ -108,5 +125,8 @@ namespace Music_Player_WFApp.Net
         {
             axWindowsMediaPlayer.Ctlcontrols.currentPosition = axWindowsMediaPlayer.currentMedia.duration * e.X / progressBar.Width;
         }
+
+        private void btnClear_Click(object sender, EventArgs e) => listBoxTrackList.Items.Clear();
+ 
     }
 }
